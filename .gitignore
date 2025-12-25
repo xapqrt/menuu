@@ -1,0 +1,17 @@
+# WASM build outputs
+/target
+/pkg
+**/*.rs.bk
+
+# Debug files
+Cargo.lock
+
+# Project specific
+jsjs.md
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
