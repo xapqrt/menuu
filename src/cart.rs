@@ -29,29 +29,14 @@ pub struct CartItem {
 
 impl CartItem {
 
-    pub fn new(
+    pub fn new (
 
-        menu_item_id: u32.
-        pub item_name: String,
-        pub quantity u32,
-        pub unit_price: f64,
-        pub subtotal: f64,
+        menu_item_id: u32,
+        item_name: String,
+        quantity: u32,
+        unit_price: f64,
 
-    )
-
-
-    #[wasm_bindgen]
-
-    impl CartItem {
-
-        pub fn new (
-
-            menu_item_id: u32,
-            item_name: String,
-            quantity: u32,
-            unit_price: f64,
-
-        ) -> CartItem {
+    ) -> CartItem {
 
 
 
@@ -77,7 +62,7 @@ impl CartItem {
 
             self.subtotal = self.unit_price * self.quantity as f64;
 
-        
+        }
     }
 }
 
@@ -115,14 +100,14 @@ impl Cart {
     //adding item to cart
 
 
-    pub fn add_item 9
+    pub fn add_item(
 
     &mut self,
     menu_item_id : u32,
     item_name: String,
     quantity: u32,
     unit_price: f64,
-} -> Result<(), String> {
+) -> Result<(), String> {
 
     if quantity == 0 {
 
@@ -170,7 +155,7 @@ impl Cart {
 
 
 
-    ok(())
+    Ok(())
 }
 
 
@@ -201,7 +186,7 @@ pub fn remove_item(&mut self, index: usize) -> Result<String, String> {
 
 //updating quanitty
 
-pub fn update_quantity(&mut slef, index: usize, new_qty: u32) -> Result<(), String> {
+pub fn update_quantity(&mut self, index: usize, new_qty: u32) -> Result<(), String> {
 
     if index >= self.items.len() {
 
@@ -219,8 +204,98 @@ pub fn update_quantity(&mut slef, index: usize, new_qty: u32) -> Result<(), Stri
     } else  {
 
         self.items[index].quantity = new_qty;
-        
+        self.items[index].recalculate_subtotal();
+
+
+        crate::console_log!(
+
+            "updated {} qty to {}",
+            self.items[index].item_name, new_qty
+        );
     }
+
+    Ok(())
 
 
 }
+
+
+
+
+
+//getting all itemss
+
+pub fn get_items(&self) -> Vec<CartItem> {
+
+    self.items.clone()
+}
+
+
+
+//huff, i still see one error idk what tf is it
+
+
+
+// getting cart item count
+
+
+pub fn item_count(&self) -> usize {
+
+    self.items.len()
+}
+
+
+
+
+//getting total items and that is js the sum of quantities
+
+
+pub fn total_items(&self) -> u32 {
+
+    self.items.iter().map(|x| x.quantity).sum()
+
+}
+
+
+
+
+//duhh this is so boring istg, idk why copilot autocomplete is not working like duh
+
+
+pub fn subtotal(&self) -> f64 {
+
+    self.items.iter().map(|x| x.subtotal).sum()     
+
+}
+
+
+
+
+//uh clearing  cart
+
+
+pub fn clear(&mut self) {
+
+    self.items.clear();
+
+
+
+
+
+    //crate consoleeee
+
+    crate::console_log!("cart cleared!");
+}
+
+
+
+
+pub fn is_empty(&self) -> bool {
+
+    self.items.is_empty()
+
+}
+}
+
+//finally this thing is done idek how am  gonna do wasm i swear
+
