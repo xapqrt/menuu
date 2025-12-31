@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RustyBite - Food Ordering (WASM!)</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🦀 RustyBite</h1>
+            <p class="subtitle">Food ordering app powered by Rust + WebAssembly</p>
+            <div id="rush-hour-indicator" class="rush-indicator">
+                Loading...
+            </div>
+        </header>
+
+        <main>
+            <!-- Menu Section -->
+            <section class="menu-section">
+                <h2>Menu</h2>
+                <div class="category-filters">
+                    <button class="filter-btn active" data-category="all">All</button>
+                    <!-- categories will be loaded from rust -->
+                </div>
+                <div id="menu-items" class="menu-grid">
+                    <!-- menu items from rust will go here -->
+                    Loading menu...
+                </div>
+            </section>
+
+            <!-- Cart Section -->
+            <section class="cart-section">
+                <h2>Your Cart 🛒</h2>
+                <div id="cart-items" class="cart-items">
+                    <p class="empty-cart">Cart is empty. Add some items!</p>
+                </div>
+                <div class="cart-summary">
+                    <div class="summary-row">
+                        <span>Subtotal:</span>
+                        <span id="subtotal">$0.00</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Tax (8%):</span>
+                        <span id="tax">$0.00</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Service Fee:</span>
+                        <span id="service-fee">$2.50</span>
+                    </div>
+                    <div class="summary-row total">
+                        <span>Total:</span>
+
+                        <span id="total">$0.00</span>
+                    </div>
+
+
+                    <button id="checkout-btn" class="btn-primary" disabled>
+                        Place Order
+                    </button>
+                </div>
+            </section>
+
+
+
+            <!-- the order section -->
+            <section class="orders-section">
+                <h2>Your Orders </h2>
+
+
+                <div id="orders-list" class="orders-list">
+                    <p class="no-orders">No orders yet</p>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>Built with Rust + WebAssembly | Learning project</p>
+        </footer>
+    </div>
+
+    <!-- Loading i hope its WASM, please workk -->
+
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>
