@@ -48,6 +48,7 @@ async function initApp() {
             currentHour = new Date().getHours();
             updateRushHourIndicator();
             updateCart();
+            renderMenu();
         }, 60000);
     } catch (err) {
 
