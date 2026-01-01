@@ -18,7 +18,6 @@ let pricing;
 let orders = [];
 let currentHour = new Date().getHours();
 let orderIdCounter = 1;
-let stockCounts = {};
 
 
 async function initApp() {
@@ -78,10 +77,6 @@ function renderMenu(category = 'all') {
 
     items.forEach(item => {
 
-        if (!stockCounts[item.id]) {
-            stockCounts[item.id] = item.stock;
-        }
-
         if (category !== 'all' && item.category !== category ) {
 
             return;
@@ -90,9 +85,8 @@ function renderMenu(category = 'all') {
         const itemDiv = document.createElement('div');
         itemDiv.className = 'menu-item';
 
-        const currentStock = stockCounts[item.id];
-        const isAvailable = currentStock > 0;
-        const stockText = isAvailable ? `stock: ${currentStock}` : 'out of stock';
+        const isAvailable = item.stock > 0;
+        const stockText = isAvailable ? `stock: ${item.stock}` : 'out of stock';
         const multiplier = pricing.get_multiplier(currentHour);
         const finalPrice = item.price * multiplier;
         const priceText = multiplier !== 1.0 ? `$${finalPrice.toFixed(2)} <small>(${multiplier}x)</small>` : `$${item.price.toFixed(2)}`;
@@ -178,22 +172,9 @@ window.addToCart = function(itemId) {
         return;
     }
 
-    if (stockCounts[itemId] <= 0) {
-        alert('out of stock');
-        return;
-    }
-
-    try {
-        cart.add_item(item.id, item.name, 1, item.price);
-        stockCounts[itemId]--;
-        console.log('item added to cart');
-        renderMenu();
-        updateCart();
-
-    } catch(err) {
-        console.error('error adding to cart:', err);
-        alert('failed to add item: ' + err);
-    }
+    cart.add_item(item.id, item.name, 1, item.price);
+    console.log('item added to cart');
+    updateCart();
 };
 
 
