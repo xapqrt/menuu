@@ -11,30 +11,20 @@ basically its a fake restaurant ordering system but ALL the logic is in rust com
 
 like the menu, cart, pricing, rush hour multipliers, order tracking - everything runs in rust in the browser
 
-no backend. no database. just wasm doing its thing at like 100x speed
+
 
 
 ## why tho
 
 - wanted to learn rust (ownership is still confusing sometimes)
 - wanted to understand wasm (still dont fully get it but it works)
-- prove that systems language can run in browser
 - make something cool for portfolio
+
+--cuz yk it looks diversified that way
 
 
 ## tech stack
 
-**rust side:**
-- structs for MenuItem, Cart, Order
-- enums for OrderStatus (first time using enums properly!)
-- pattern matching with match expressions
-- Result<T, E> for error handling
-- wasm-bindgen to export to js
-
-**frontend:**
-- vanilla html/css/js (keeping it simple)
-- js just calls rust functions
-- zero calculation in javascript
 
 
 ## features
@@ -91,23 +81,6 @@ npx serve
 ```
 
 
-## project structure
-
-```
-rustybite/
-├── Cargo.toml              # rust dependencies
-├── src/
-│   ├── lib.rs              # wasm entry point
-│   ├── menu.rs             # menu items + categories
-│   ├── cart.rs             # shopping cart logic
-│   ├── pricing.rs          # rush hour pricing
-│   └── order.rs            # order management
-├── pkg/                    # generated wasm (gitignored)
-├── index.html              # ui
-├── styles.css              # styling
-├── app.js                  # js bridge to wasm
-└── README.md               # this file
-```
 
 
 ## what i learned
@@ -124,7 +97,7 @@ rustybite/
 
 **wasm:**
 - compiling rust to wasm
-- js ↔ rust bridge
+- js  and rust bridge
 - memory management
 - performance (wasm is FAST)
 - export functions with #[wasm_bindgen]
@@ -139,7 +112,7 @@ rustybite/
 
 ## known issues
 
-- no persistence (refresh = lose cart)
+- no persistence 
 - hardcoded menu items (should load from json)
 - rush hour based on client time (not server)
 - no real payment processing
@@ -171,14 +144,6 @@ spent way too long on:
 - debugging type errors
 
 
-## resume flex
-
-- ✅ rust programming
-- ✅ webassembly compilation
-- ✅ systems thinking
-- ✅ type safety
-- ✅ performance optimization
-- ✅ full-stack (no backend but still)
 
 
 ## conclusion
@@ -198,4 +163,4 @@ built by someone learning rust for the first time
 
 if you found this helpful or have suggestions, lmk!
 
-no ai was used in writing this code (just learning from docs and stackoverflow lol)
+no ai was used in writing this code (just learning from docs and stackoverflow lma)

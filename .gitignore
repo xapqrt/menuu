@@ -8,6 +8,7 @@ Cargo.lock
 
 # Project specific
 jsjs.md
+DEPLOY.txt
 
 # IDE
 .vscode/
