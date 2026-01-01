@@ -98,12 +98,12 @@ impl Cart {
     item_name: String,
     quantity: u32,
     unit_price: f64,
-) -> Result<(), String> {
+) {
 
     if quantity == 0 {
 
-        return Err("Quantity cannot be zero".to_string());
-
+        crate::console_log!("Quantity cannot be zero");
+        return;
 
     }
 
@@ -142,11 +142,6 @@ impl Cart {
 
 
     }
-
-
-
-
-    Ok(())
 }
 
 
