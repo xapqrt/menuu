@@ -242,14 +242,14 @@ function updateCart() {
 
     try {
         const total = pricing.calculate_total(cart, currentHour);
-        cartTotal.textContent = `$${total.toFixed(2)}`;
-
-
-        //show breakdown
         const subtotal = pricing.calculate_subtotal(cart, currentHour);
         const tax = subtotal * 0.08;
         const fee = 2.50;
 
+        document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
+        document.getElementById('tax').textContent = `$${tax.toFixed(2)}`;
+        document.getElementById('service-fee').textContent = `$${fee.toFixed(2)}`;
+        cartTotal.textContent = `$${total.toFixed(2)}`;
 
         console.log('pricing breakdown:', {subtotal, tax, fee, total});
 
