@@ -63,7 +63,7 @@ extern "c" {
 #[macro_export]
 macro_rules! console.log {
 
-    ($($t:tt)*) => (log(&format_args!($($t)*).to_string()))
+    ($($t:tt)*) => (crate::log(&format_args!($($t)*).to_string()))
 }
 
 //yup first commit, it was pretty hard took me so many trips to the documentation lmaoo

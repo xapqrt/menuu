@@ -6,7 +6,6 @@ use wasm_bindgen::prelude::*;
 use serde::{Serialize, Deserialize};
 
 
-#[wasm_bindgen]
 #[derive(Clone, Serialize, Deserialize, Debug)]
 
 pub struct CartItem {
@@ -17,15 +16,8 @@ pub struct CartItem {
     pub unit_price: f64,
     pub subtotal: f64,
 
-
-
-
-
-
 }
 
-
-#[wasm_bindgen] 
 
 impl CartItem {
 
@@ -64,7 +56,6 @@ impl CartItem {
 
         }
     }
-}
 
 
 
@@ -225,9 +216,9 @@ pub fn update_quantity(&mut self, index: usize, new_qty: u32) -> Result<(), Stri
 
 //getting all itemss
 
-pub fn get_items(&self) -> Vec<CartItem> {
+pub fn get_items(&self) -> JsValue {
 
-    self.items.clone()
+    serde_wasm_bindgen::to_value(&self.items).unwrap()
 }
 
 

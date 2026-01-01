@@ -105,7 +105,7 @@ impl Pricing {
 
 
 
-            crate::console_log(&format!("price calc: base={}, mult={}, qty={}, final={}", base_price, multiplier, qty, price));
+            crate::console_log!("price calc: base={}, mult={}, qty={}, final={}", base_price, multiplier, qty, price);
 
 
 
@@ -125,7 +125,8 @@ impl Pricing {
 
 
 
-        let items = cart.get_items();
+        let items_js = cart.get_items();
+        let items: Vec<crate::cart::CartItem> = serde_wasm_bindgen::from_value(items_js).unwrap();
         let mut total = 0.0;
 
 

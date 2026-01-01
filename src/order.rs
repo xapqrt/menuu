@@ -74,7 +74,7 @@ impl Order {
         pub fn new(
 
             id: u32,
-            items: Vec<CartItem>,
+            items_js: JsValue,
 
             total: f64,
             current_time: u32,
@@ -83,6 +83,7 @@ impl Order {
 
         ) -> Order {
 
+        let items: Vec<CartItem> = serde_wasm_bindgen::from_value(items_js).unwrap();
         let item_count = items.len() as u32;
 
         let estimated_wait = Order::estimate_wait_time(item_count, is_rush_hour);

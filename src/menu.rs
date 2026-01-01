@@ -8,7 +8,6 @@ use serde::{Serialize, Deserialize};
 //menuitem am thinking will be representing one item on the menu at a time
 
 
-#[wasm_bindgen]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct MenuItem {
 
@@ -26,10 +25,8 @@ pub struct MenuItem {
 
 //impl block guna adds methods to MenuItem
 
-#[wasm_bindgen]
 impl MenuItem {
 
-    #[wasm_bindgen(constructor)]
     pub fn new (
 
         id: u32,
@@ -221,9 +218,9 @@ impl Menu {
 
 
 
-        pub fn get_all_items(&self) -> Vec<MenuItem>{
+        pub fn get_all_items(&self) -> JsValue{
 
-            self.items.clone()
+            serde_wasm_bindgen::to_value(&self.items).unwrap()
             //will this make it slow idk, guess well find out
 
 
@@ -231,7 +228,7 @@ impl Menu {
 
 
 
-        pub fn get_item_by_id(&self, id: u32) -> Option<MenuItem>{
+        fn get_item_by_id(&self, id: u32) -> Option<MenuItem>{
 
             self.items.iter().find(|item| item.id == id).cloned()
 
@@ -244,19 +241,29 @@ impl Menu {
 
         //categoryy
 
-        pub fn get_item_by_category(&self, category: &str) -> Vec<MenuItem> {
+        pub fn get_item_by_category(&self, category: &str) -> JsValue {
 
-            self.items
+            let items: Vec<&MenuItem> = self.items
             .iter()
             .filter(|item| item.category == category)
-            .cloned()
-            .collect()
+            .collect();
+            serde_wasm_bindgen::to_value(&items).unwrap()
 
 
 
         }
 
 
+
+        pub fn get_item_by_id_json(&self, id: u32) -> JsValue{
+
+           match self.items
+            .iter()
+            .find(|item| item.id == id) {
+                Some(item) => serde_wasm_bindgen::to_value(&item).unwrap(),
+                None => JsValue::NULL
+            }
+        }
 
 
         //getting unique categoriess
@@ -290,8 +297,3 @@ impl Menu {
             .unwrap_or(false)
         }
     }
-
-
-
-
-}
