@@ -1,6 +1,5 @@
 # WASM build outputs
 /target
-/pkg
 **/*.rs.bk
 
 # Debug files
