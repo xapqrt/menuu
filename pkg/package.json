@@ -1,0 +1,15 @@
+{
+  "name": "rustybite",
+  "type": "module",
+  "version": "0.1.0",
+  "files": [
+    "rustybite_bg.wasm",
+    "rustybite.js",
+    "rustybite.d.ts"
+  ],
+  "main": "rustybite.js",
+  "types": "rustybite.d.ts",
+  "sideEffects": [
+    "./snippets/*"
+  ]
+}
