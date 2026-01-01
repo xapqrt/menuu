@@ -302,10 +302,17 @@ function updateRushHourIndicator() {
 
     const message = pricing.get_rush_hour_message(currentHour);
     const isRush = pricing.is_rush_hour(currentHour);
-
+    const multiplier = pricing.get_multiplier(currentHour);
 
     indicator.textContent = message;
-    indicator.className = isRush ? 'rush-active' : 'rush-normal';
+    
+    if (multiplier > 1.0) {
+        indicator.className = 'rush-indicator rush';
+    } else if (multiplier < 1.0) {
+        indicator.className = 'rush-indicator discount';
+    } else {
+        indicator.className = 'rush-indicator';
+    }
 
 
     console.log('rush hour update:', message);
