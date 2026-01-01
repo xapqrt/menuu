@@ -126,6 +126,7 @@ function renderCategories() {
     const filters = document.querySelector('.category-filters');
     const categories = menu.get_categories();
 
+    filters.innerHTML = '';
 
     //add all button
     const allBtn = document.createElement('button');
