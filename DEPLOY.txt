@@ -1,0 +1,65 @@
+DEPLOYMENT OPTIONS:
+
+=== 1. STATIC HOST (EASIEST) ===
+Deploy to any static site host that supports WASM:
+
+Netlify (FREE):
+- Go to https://app.netlify.com/drop
+- Drag and drop your entire 'd:\a7\menuu' folder
+- Done! Auto HTTPS + CDN
+
+Vercel (FREE):
+- npm i -g vercel
+- cd d:\a7\menuu
+- vercel --prod
+
+GitHub Pages (FREE):
+- git remote add origin https://github.com/yourusername/rustybite.git
+- git push -u origin master
+- Go to repo Settings > Pages > Source: master branch
+- Site live at https://yourusername.github.io/rustybite
+
+Cloudflare Pages (FREE):
+- https://pages.cloudflare.com
+- Connect GitHub repo
+- Build: Leave empty (no build needed)
+- Output: / (root)
+- Deploy
+
+
+=== 2. YOUR OWN SERVER ===
+Copy files to any web server with HTTP:
+- Apache: Copy to /var/www/html/
+- Nginx: Copy to /usr/share/nginx/html/
+- IIS: Copy to C:\inetpub\wwwroot\
+
+Important: Server must serve .wasm files with correct MIME type!
+Add to config: application/wasm .wasm
+
+
+=== 3. LOCAL TESTING ===
+python -m http.server 8080
+# or
+.\serve.ps1
+
+
+=== FILES TO DEPLOY ===
+Required files (deploy these):
+- index.html
+- styles.css
+- app.js
+- pkg/ (entire folder with WASM)
+- README.md
+
+Optional:
+- server.ps1, serve.ps1 (if self-hosting)
+
+
+=== IMPORTANT NOTES ===
+1. WASM requires HTTPS in production (or localhost)
+2. Server must support .wasm MIME type
+3. No build step needed - just upload files!
+4. Works on any CDN/static host
+5. No backend required - 100% client-side
+
+Recommended: Use Netlify Drop for instant deployment
