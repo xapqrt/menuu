@@ -176,7 +176,9 @@ window.addToCart = function(itemId) {
 
     try {
         cart.add_item(item.id, item.name, 1, item.price);
+        menu.reduce_item_stock(itemId, 1);
         console.log('item added to cart');
+        renderMenu();
         updateCart();
 
     } catch(err) {

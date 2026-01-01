@@ -296,4 +296,13 @@ impl Menu {
 
             .unwrap_or(false)
         }
+
+        pub fn reduce_item_stock(&mut self, id: u32, qty: u32) -> Result<(), String> {
+            for item in &mut self.items {
+                if item.id == id {
+                    return item.reduce_stock(qty);
+                }
+            }
+            Err(format!("Item {} not found", id))
+        }
     }
