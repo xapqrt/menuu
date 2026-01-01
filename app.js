@@ -191,6 +191,7 @@ function updateCart() {
 
     const cartItems = document.getElementById('cart-items');
     const cartTotal = document.getElementById('total');
+    const checkoutBtn = document.getElementById('checkout-btn');
 
 
     cartItems.innerHTML = '';
@@ -205,8 +206,11 @@ function updateCart() {
 
         cartItems.innerHTML = '<p class="empty-cart">cart is empty</p>';
         cartTotal.textContent = '$0.00';
+        checkoutBtn.disabled = true;
         return;
     }
+
+    checkoutBtn.disabled = false;
 
 
     items.forEach((item, index) => {
