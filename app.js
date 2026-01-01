@@ -253,13 +253,16 @@ function updateCart() {
         const subtotal = pricing.calculate_subtotal(cart, currentHour);
         const tax = subtotal * 0.08;
         const fee = 2.50;
+        const multiplier = pricing.get_multiplier(currentHour);
 
-        document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
+        document.getElementById('subtotal').textContent = multiplier !== 1.0 
+            ? `$${subtotal.toFixed(2)} (${multiplier}x applied)` 
+            : `$${subtotal.toFixed(2)}`;
         document.getElementById('tax').textContent = `$${tax.toFixed(2)}`;
         document.getElementById('service-fee').textContent = `$${fee.toFixed(2)}`;
         cartTotal.textContent = `$${total.toFixed(2)}`;
 
-        console.log('pricing breakdown:', {subtotal, tax, fee, total});
+        console.log('pricing breakdown:', {subtotal, tax, fee, total, multiplier});
 
     } catch (err) {
         console.error('error calculating total:', err);
