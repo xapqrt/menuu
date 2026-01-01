@@ -87,13 +87,16 @@ function renderMenu(category = 'all') {
 
         const isAvailable = item.stock > 0;
         const stockText = isAvailable ? `stock: ${item.stock}` : 'out of stock';
+        const multiplier = pricing.get_multiplier(currentHour);
+        const finalPrice = item.price * multiplier;
+        const priceText = multiplier !== 1.0 ? `$${finalPrice.toFixed(2)} <small>(${multiplier}x)</small>` : `$${item.price.toFixed(2)}`;
 
         itemDiv.innerHTML = `
         
         <h3>${item.name}</h3>
         
         <p>${item.description}</p>
-        <div class = "price">$${item.price.toFixed(2)}</div>
+        <div class = "price">${priceText}</div>
         <div class = "stock">${stockText}</div>
         
         <button onclick = "addToCart(${item.id})" ${!isAvailable ? 'disabled' : ''}>
@@ -161,7 +164,7 @@ window.addToCart = function(itemId) {
 
     console.log('adding item to cart:', itemId);
 
-    const item = menu.get_item_by_id(itemId);
+    const item = menu.get_item_by_id_json(itemId);
 
     if (!item) {
         console.error('item not found');
@@ -187,7 +190,7 @@ window.addToCart = function(itemId) {
 function updateCart() {
 
     const cartItems = document.getElementById('cart-items');
-    const cartTotal = document.getElementById('cart-total');
+    const cartTotal = document.getElementById('total');
 
 
     cartItems.innerHTML = '';
